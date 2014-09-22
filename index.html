@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
     <script src="javascripts/scale.fix.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
     <!--[if lt IE 9]>
@@ -17,8 +18,8 @@
   <body>
     <div class="wrapper">
       <header>
-        <h1>Fpl</h1>
-        <p>FPL page</p>
+        <h1>FPL</h1>
+        <p>Home</p>
         <p class="view"><a href="https://github.com/raveeshyadav/fpl">View the Project on GitHub <small>raveeshyadav/fpl</small></a></p>
         <ul>
           <li><a href="https://github.com/raveeshyadav/fpl/zipball/master">Download <strong>ZIP File</strong></a></li>
@@ -28,7 +29,11 @@
       </header>
       <section>
         <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to FPL page</h3>
+
+<div id="playername" class="header-name">
+
+</div>
 
 <p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
 
@@ -66,5 +71,38 @@ $ git checkout gh-pages
     </footer>
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
     
+	<!-- Loading the dynamic data now -->
+	
+	<script >
+	
+	$(function(){
+		 var fplAPI = "http://m.fantasy.premierleague.com/drf/leagues-classic-standings/608606";
+		 /* $.getJSON(fplAPI)
+			.done(function( data ) {
+					$.each( data.standings.results, function( i, item ) {
+							$( "<p>" ).text( item.entry_name ).appendTo( "#playername" );
+							if ( i === 3 ) {
+								return false;
+							}
+						});
+					});
+		 
+
+	}); */
+	
+	$.ajax({
+    type: "GET",
+    dataType: 'text',
+    url: fplAPI,
+    crossDomain : true
+	}).done(function( data ) {
+					$( "<p>" ).text( data ).appendTo( "#playername" );
+					});
+		 
+
+	}); 
+	
+	</script>	
+	
   </body>
 </html>
