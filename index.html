@@ -72,37 +72,24 @@ $ git checkout gh-pages
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
     
 	<!-- Loading the dynamic data now -->
-	
-	<script >
-	
-	$(function(){
-		 var fplAPI = "http://m.fantasy.premierleague.com/drf/leagues-classic-standings/608606";
-		 /* $.getJSON(fplAPI)
-			.done(function( data ) {
-					$.each( data.standings.results, function( i, item ) {
-							$( "<p>" ).text( item.entry_name ).appendTo( "#playername" );
-							if ( i === 3 ) {
-								return false;
-							}
-						});
-					});
-		 
 
-	}); */
-	
-	$.ajax({
-    type: "GET",
-    dataType: 'text',
-    url: fplAPI,
-    crossDomain : true
-	}).done(function( data ) {
-					$( "<p>" ).text( data ).appendTo( "#playername" );
-					});
-		 
+	<script>
+  function kimonoCallback(data) {
+  
+   $.each( data.results.collection1, function( index, value ){
+    $( "<p>" ).text(value.Name).appendTo( "#playername" );
+	$( "<p>" ).text(value["Game Week Points"]).appendTo( "#playername" );
+	});
+    
+  }
 
-	}); 
+  $.ajax({
+    "url":"https://www.kimonolabs.com/api/dciqqp28?apikey=Yn3A3l8LLcPGiisR0uqi3zappdehaMRb&callback=kimonoCallback",
+    "crossDomain":true,
+    "dataType":"jsonp"
+});
+</script>
 	
-	</script>	
 	
   </body>
 </html>
